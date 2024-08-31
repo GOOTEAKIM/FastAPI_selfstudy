@@ -9,7 +9,7 @@ def get_all() -> list[Creature]:
 def get_one(name:str) -> Optional[Creature]:
     return data.get_one(name)
 
-def creature(creature:Creature) -> Creature:
+def create(creature:Creature) -> Creature:
     return data.create(creature)
 
 def replace(name:str, creature:Creature) -> Creature:
