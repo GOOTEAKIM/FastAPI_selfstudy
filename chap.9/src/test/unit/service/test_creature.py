@@ -1,5 +1,5 @@
 from model.creature import Creature
-from service import create, get_all, get_one, replace, modify, delete
+from src.service import creature as code
 
 sample = Creature(
     name='Yeti',
@@ -10,13 +10,13 @@ sample = Creature(
 )
 
 def test_create():
-    resp = create(sample)
+    resp = code.create(sample)
     assert resp == sample
 
 def test_get_exists():
-    resp = get_one('Yeti')
+    resp = code.get_one('Yeti')
     assert resp == sample
 
 def test_get_missing():
-    resp = get_one('boxturtle')
+    resp = code.get_one('boxturtle')
     assert resp is None

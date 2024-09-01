@@ -1,11 +1,8 @@
 from fastapi import APIRouter
-
 from model.creature import Creature
-import service.creature as service
+import fake.creature as service
 
-from typing import Optional
-
-router = APIRouter(prefix= '/creature')
+router = APIRouter(prefix='/creature')
 
 @router.get('/')
 def get_all() -> list[Creature]:
@@ -13,20 +10,23 @@ def get_all() -> list[Creature]:
 
 @router.get('/{name}')
 def get_one(name) -> Creature:
-    return service.get_one()
+    return service.get_one(name)
+
+# 나머지 엔드 포인트. 현재는 아무 일도 하지 않는다.
 
 @router.post('/')
-def create(creature:Creature) -> Creature:
+def create(creature: Creature) -> Creature:
     return service.create(creature)
 
 @router.patch('/{name}')
-def modify(name, creature: Creature) -> Creature:
-    return service.modify(name,creature)
+def modify(name, creature:Creature) -> Creature:
+    return service.modify(name, creature)
 
 @router.put('/{name}')
 def replace(name, creature:Creature) -> Creature:
-    return service.replace(name,creature)
+    return service.replace(name, creature)
 
 @router.delete('/{name}')
 def delete(name:str):
     return service.delete(name)
+
