@@ -1,14 +1,22 @@
+import uvicorn
+import os
 from fastapi import FastAPI
 
-from typing import Union
+from dotenv import load_dotenv
 
-app = FastAPI()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+def create_app() -> FastAPI:
+    app = FastAPI()
+    return app
+
+app = create_app()
 
 @app.get('/')
 def read_rood():
-    return {"hello": "world"}
+    test_env = os.environ['TEST_ENV']
+    return {'result': test_env}
 
-@app.get('/items/{item_id}')
-def read_item(item_id: int, q: Union[str,None] = None):
-    return {"item_id": item_id, "q":q}
-
+if __name__ == "__main__":
+    uvicorn.run(app, host='0.0.0.0')
