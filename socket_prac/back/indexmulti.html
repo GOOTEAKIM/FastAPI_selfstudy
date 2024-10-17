@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <input type="text" id="messageInput" placeholder="메시지 입력">
+    <button id="sendButton">전송</button>
+    <div id="messages"></div>
+
+    <script>
+        const socket = new WebSocket("ws://127.0.0.1:8000/ws/agv");
+
+        socket.onopen = () => {
+            console.log("서버에 연결됨");
+        };
+
+        socket.onmessage = (event) => {
+            const messagesDiv = document.getElementById("messages");
+            messagesDiv.innerHTML += `<p>${event.data}</p>`;
+        };
+
+        document.getElementById("sendButton").onclick = () => {
+            const messageInput = document.getElementById("messageInput");
+            socket.send(messageInput.value);
+            messageInput.value = ""; // 입력 필드 초기화
+        };
+    </script>
+</body>
+</html>

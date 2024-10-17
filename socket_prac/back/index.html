@@ -1,0 +1,59 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #messages { margin-bottom: 10px; }
+        .message { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <div id="messages"></div>
+    <input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
+    <button id="sendMessage">전송</button>
+    
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageButton = document.getElementById('sendMessage');
+
+        // WebSocket 연결 생성
+        const websocket = new WebSocket('ws://localhost:8000/ws/agv');
+
+        // WebSocket 연결이 열리면
+        websocket.onopen = () => {
+            console.log('WebSocket 연결됨');
+        };
+
+        // WebSocket 메시지 수신
+        websocket.onmessage = (event) => {
+            const message = document.createElement('div');
+            message.classList.add('message');
+            message.textContent = `서버: ${event.data}`;
+            messagesDiv.appendChild(message);
+        };
+
+        // WebSocket 연결이 닫히면
+        websocket.onclose = () => {
+            console.log('WebSocket 연결이 종료됨');
+        };
+
+        // 버튼 클릭 시 메시지 전송
+        sendMessageButton.onclick = () => {
+            const message = messageInput.value;
+            if (message) {
+                websocket.send(message);  // 서버로 메시지 전송
+                const sentMessage = document.createElement('div');
+                sentMessage.classList.add('message');
+                sentMessage.textContent = `전송: ${message}`;
+                messagesDiv.appendChild(sentMessage);
+                messageInput.value = '';  // 입력 필드 비우기
+            }
+        };
+    </script>
+</body>
+</html> -->
